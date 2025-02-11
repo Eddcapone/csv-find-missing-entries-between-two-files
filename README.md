@@ -3,7 +3,7 @@
 ## Overview
 
 The CSV Comparison Tool is a desktop application designed to compare two CSV files and identify
-rows from the first file that are not present in the second file, based on the first column.
+rows from the reference file that are not present in the target file, based on the first column.
 This tool is particularly useful for managing translation files, where you need to ensure
 that all necessary translation keys are present across different language versions.
 
@@ -43,10 +43,50 @@ Run the script with the following command:
 ## Using the Application
 
 Upon launching, the application will display a window with buttons to browse and select two CSV files.
-Select CSV File 1: This is the primary file that you want to check for missing entries.
-Select CSV File 2: This file is used as the reference to check against.
+
+![image](https://github.com/user-attachments/assets/34337d18-4b1e-4861-908c-a746259633f6)
+
+Select Reference File (File 1): This is the primary file that you want to check for missing entries.
+
+Select Target File (File 2): This file is used as the reference to check against.
+
 After selecting both files, click the "Compare CSVs" button to start the comparison.
-The application will process the files and output a new file named missing_entries.csv in the same directory as the script, containing any rows from File 1 that do not have a matching first column in File 2.
+The application will process the files and output a new file named **missing_entries.csv** in the same directory as the script, containing any rows from File 1 that do not have a matching first column in File 2.
+
+### Example:
+
+1_reference_file.csv:
+
+    "Customer account and password are required.","Kundenkonto und Passwort sind erforderlich."
+    "Registered Customers","Registrierte Kunden"
+    "Password","Passwort"
+    "Mandatory fields","Pflichtfelder"
+    "Sign in","Anmelden"
+    "Review Details","Details überprüfen","module","Magento_Review"
+    "View all ""customer"" reviews","Alle ""Kundenmeinungen"" anzeigen","module","Magento_Review"
+    "Customer opinion","Kundenmeinung","module","Magento_Review"
+    "Customer opinion(s)","Kundenmeinung(en)","module","Magento_Review"
+    "Submit Review","Bewertung absenden"
+    "Thank you for your review.","Danke für Ihre Bewertung."
+
+2_target_file.csv:
+
+    "Customer account and password are required.","Kundenkonto und Passwort sind erforderlich."
+    "Registered Customers","Registrierte Kunden"
+    "Password","Passwort"
+    "Mandatory fields","Pflichtfelder"
+    "Sign in","Anmelden"
+    "Review Details","Details überprüfen","module","Magento_Review"
+    "View all ""customer"" reviews","Alle ""Kundenmeinungen"" anzeigen","module","Magento_Review"
+    "Customer opinion","Kundenmeinung","module","Magento_Review"
+
+Result (missing_entries.csv):
+
+    "Customer opinion(s)","Kundenmeinung(en)","module","Magento_Review"
+    "Submit Review","Bewertung absenden"
+    "Thank you for your review.","Danke für Ihre Bewertung."
+
+
 
 ## Troubleshooting
 CSV Format Issues: Ensure that your CSV files do not contain inconsistent row formats. Each row should consistently use commas to delimit fields, and text should be appropriately quoted if it contains commas.
